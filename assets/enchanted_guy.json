@@ -1,0 +1,35 @@
+{
+"frames": {
+	"Enchanted_Guy_01.png": {
+		"frame": {"x":17, "y":0, "w":16, "h":17},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":17},
+		"sourceSize": {"w":16,"h":17}
+	},
+	"Enchanted_Guy_02.png": {
+		"frame": {"x":17, "y":18, "w":16, "h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	"Enchanted_Guy_03.png": {
+		"frame": {"x":34, "y":0, "w":16, "h":18},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":18},
+		"sourceSize": {"w":16,"h":18}
+	},
+	"Enchanted_Guy_04.png": {
+		"frame": {"x":0, "y":18, "w":16, "h":18},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":18},
+		"sourceSize": {"w":16,"h":18}
+	},
+	"Enchanted_Guy_05.png": {
+		"frame": {"x":0, "y":0, "w":16, "h":17},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":17},
+		"sourceSize": {"w":16,"h":17}
+	}
+
+},
+"meta": {
+	"image": "enchanted_guy.png",
+	"size": {"w": 51, "h": 37},
+	"scale": "1"
+}
+}

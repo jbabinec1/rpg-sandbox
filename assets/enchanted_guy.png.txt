@@ -1,0 +1,1 @@
+enchanted_guy_still_01.png.png 0 0, enchanted_guy_02.png.png 17 0, enchanted_guy_03.png.png 34 0, enchanted_guy_04.png.png 0 18, enchanted_guy_05.png.png 17 18.
