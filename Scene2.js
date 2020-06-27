@@ -22,13 +22,18 @@ class Scene2 extends Phaser.Scene {
       this.sign = this.map.createStaticLayer('Sign', this.tileset, 0, 0);
       
     
-      this.player = this.physics.add.sprite(10, 25, 'char_sprites', 'enchanted_guy_still_01.png').setScale(4);
+      this.player = this.physics.add.sprite(50, 99, 'char_sprites', 'enchanted_guy_still_01.png').setScale(4);
+
+
+      this.sword = this.physics.add.sprite(30, 180, 'char_sprites', 'Enchanted_Sword.png').setScale(2);
+
       this.npc = this.physics.add.sprite(300, 90, 'npc_sprites', 'enchanted_npc.png');
       //this.player = this.physics.add.image(config.width / 2 - 8, config.height - 64, 'player'); 
 
+
+
       this.player.setVelocity(0);
       this.player.body.setAllowGravity(false);
-
       this.player.setCollideWorldBounds(false); 
 
       
@@ -38,11 +43,14 @@ class Scene2 extends Phaser.Scene {
       this.npc.body.immovable = true; 
 
 
+      this.sword.body.setAllowGravity(false);
+
+
       //Collision between player and trees
       this.trees.setCollisionBetween(1, 70);
       this.physics.add.collider(this.player, this.trees);
 
-     //Add collision between player and sign
+   
      
       this.physics.add.collider(this.player, this.npc);
 
@@ -58,15 +66,19 @@ class Scene2 extends Phaser.Scene {
       
       
 
+      // When player walks over sword, overlap and trigger pickUpSword function
+      this.physics.add.overlap(this.player, this.sword, this.pickUpSword, null, this);
       
 
-        // set bounds so the camera won't go outside the game world
+
+    // set bounds so the camera won't go outside the game world
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     // make the camera follow the player
     this.cameras.main.startFollow(this.player); 
 
 
-      this.cursorKeys = this.input.keyboard.createCursorKeys(); 
+    
+    this.cursorKeys = this.input.keyboard.createCursorKeys(); 
 
     }  // End of create function
 
@@ -112,8 +124,11 @@ class Scene2 extends Phaser.Scene {
 
 
 
-
-
+//When player hovers over sword, destroy it and change character texture to show Enchanted_Guy_Sword
+   pickUpSword(player, sword){
+    sword.disableBody(true, true); 
+    player.setTexture('char_sprites','Enchanted_Guy_Sword.png');
+  }
 
 
 
