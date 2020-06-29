@@ -5,6 +5,7 @@ var gameSettings = {
   var config =    {
       width: 800,
       height: 600,
+      parent: 'game-container',
       //backgroundColor: 0x000000,
       scene: [LoadScene, Scene2],
       pixelArt: true,

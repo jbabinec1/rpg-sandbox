@@ -1,0 +1,55 @@
+{
+"frames": {
+	"Enchanted_Guy_Sword.png": {
+		"frame": {"x":57, "y":0, "w":21, "h":17},
+		"spriteSourceSize": {"x":5,"y":3,"w":30,"h":20},
+		"sourceSize": {"w":30,"h":20}
+	},
+	"Enchanted_Sword.png": {
+		"frame": {"x":74, "y":18, "w":5, "h":11},
+		"spriteSourceSize": {"x":0,"y":0,"w":5,"h":11},
+		"sourceSize": {"w":5,"h":11}
+	},
+	"enchanted_guy_02.png": {
+		"frame": {"x":57, "y":36, "w":16, "h":17},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":17},
+		"sourceSize": {"w":16,"h":17}
+	},
+	"enchanted_guy_03.png": {
+		"frame": {"x":57, "y":90, "w":16, "h":18},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":18},
+		"sourceSize": {"w":16,"h":18}
+	},
+	"enchanted_guy_04.png": {
+		"frame": {"x":57, "y":71, "w":16, "h":18},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":18},
+		"sourceSize": {"w":16,"h":18}
+	},
+	"enchanted_guy_05.png": {
+		"frame": {"x":57, "y":54, "w":16, "h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	"enchanted_guy_still_01.png": {
+		"frame": {"x":57, "y":18, "w":16, "h":17},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":17},
+		"sourceSize": {"w":16,"h":17}
+	},
+	"inventory.png": {
+		"frame": {"x":0, "y":0, "w":56, "h":56},
+		"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
+		"sourceSize": {"w":56,"h":56}
+	},
+	"inventory_with_sword.png": {
+		"frame": {"x":0, "y":57, "w":56, "h":56},
+		"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
+		"sourceSize": {"w":56,"h":56}
+	}
+
+},
+"meta": {
+	"image": "enchanted_characterJr.png",
+	"size": {"w": 80, "h": 114},
+	"scale": "1"
+}
+}
