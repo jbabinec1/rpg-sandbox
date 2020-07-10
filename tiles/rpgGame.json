@@ -59,6 +59,7 @@
          "y":0
         }, 
         {
+         "color":"#ca950000",
          "draworder":"topdown",
          "id":6,
          "name":"spawn",

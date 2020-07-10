@@ -15,6 +15,8 @@ class Scene2 extends Phaser.Scene {
 
       this.tileset = this.map.addTilesetImage('RPG Nature Tileset', 'rpgMap');
 
+      //this.start = this.map.objects['spawn']['0'];
+      this.start = this.map.createFromObjects('spawn', 1, { key: 'entry' });
 
 
       this.grass = this.map.createStaticLayer('Grass', this.tileset, 0, 0);
@@ -22,13 +24,20 @@ class Scene2 extends Phaser.Scene {
       this.sign = this.map.createStaticLayer('Sign', this.tileset, 0, 0);
       
     
-      this.player = this.physics.add.sprite(50, 99, 'char_sprites', 'enchanted_guy_still_01.png').setScale(4);
+      this.player = this.physics.add.sprite(32.3799, 291.419, 'char_sprites', 'enchanted_guy_still_01.png').setScale(4);
 
 
       this.sword = this.physics.add.sprite(30, 180, 'char_sprites', 'Enchanted_Sword.png').setScale(2);
 
       this.npc = this.physics.add.sprite(300, 90, 'npc_sprites', 'enchanted_npc.png');
-      //this.player = this.physics.add.image(config.width / 2 - 8, config.height - 64, 'player'); 
+
+      
+      
+      this.npcAnimation();
+      
+       //start npc movement 
+      
+
 
 
       // Weapon slot
@@ -50,12 +59,18 @@ class Scene2 extends Phaser.Scene {
       this.player.body.setAllowGravity(false);
       this.player.setCollideWorldBounds(false); 
       //this.player.setSize(30, 0, 0, 0);
+      
 
       
       this.npc.body.setAllowGravity(false);
       this.npc.body.setSize(20, 20);
       this.npc.enableBody = true; 
       this.npc.body.immovable = true; 
+
+
+     
+    
+    
 
 
       this.sword.body.setAllowGravity(false);
@@ -93,18 +108,13 @@ class Scene2 extends Phaser.Scene {
 
 
 
-    //this.weaponBtn.on('gameobjectdown',this.removeSword);
-    this.weaponBtn.on('pointerdown', function (weaponBtn) {
-      //this.setFrame(3);
-      this.setTexture('item_slot');
-      //player.setTexture('char_sprites', 'enchanted_guy_still_01.png');
-
-  });
-
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.F = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
     
     this.cursorKeys = this.input.keyboard.createCursorKeys(); 
+
+
+    let flag = true;
 
     }  // End of create function
 
@@ -120,28 +130,47 @@ class Scene2 extends Phaser.Scene {
 
     if(this.cursorKeys.left.isDown){
       this.player.setVelocityX(-gameSettings.playerSpeed);
+      this.player.flipX = true;
+      
+
+
+      
     }else if(this.cursorKeys.right.isDown){
       this.player.setVelocityX(gameSettings.playerSpeed);
+      this.player.flipX = false;
     }
    
     if(this.cursorKeys.up.isDown){
       this.player.setVelocityY(-gameSettings.playerSpeed);
+      
     }else if(this.cursorKeys.down.isDown){
       this.player.setVelocityY(gameSettings.playerSpeed);
+      
     }
 
 
 
-    // Display text from NPC when colliding with Player
-    if(this.cursorKeys.left.isDown) {
-    this.DisplayText = this.npc.body.touching.none ? '' : 'You see that sword?';
+
+
+    // Display text from NPC when colliding with Player. Two separate questions if you are or are not armed wih the sword. 
+    if(this.cursorKeys.left.isDown && this.player.texture.key === 'armed_guy') {
+    this.DisplayText = this.npc.body.touching.none ? '' : 'You like that sword breh?';
     this.Text.setText(this.DisplayText);
-   
-    } else if (this.cursorKeys.right.isDown) {
+    this.Text.x = this.npc.body.position.x;
+    } 
+    else if(this.cursorKeys.left.isDown && this.player.texture.key !== 'armed_guy') {
+      this.DisplayText = this.npc.body.touching.none ? '' : 'You gonna grab that sword breh?';
+    this.Text.setText(this.DisplayText);
+    this.Text.x = this.npc.body.position.x;
+    }
+    else if (this.cursorKeys.right.isDown) {
       this.Text.setText('');
+      
     } else if(this.cursorKeys.down.isDown) {
       this.Text.setText('');
     }
+
+
 
     // Drop weapon .. Make it disappear from inventory slot / character .. show sword on ground
     if (Phaser.Input.Keyboard.JustDown(this.F) && this.player.texture.key === 'armed_guy' ) {
@@ -154,13 +183,21 @@ class Scene2 extends Phaser.Scene {
     } 
 
 
-
+//If player is interacting with npc on its right side, pause. Pressing right resumes tween
+    
+      if (this.npc.body.touching.right) {
+      this.tween.pause();
+      }  if (this.cursorKeys.right.isDown)  {
+        this.tween.resume();
+      }
+      
     
 
-    //this.weaponBtn.on('pointerdown', this.weaponState);
 
 
    } //End update area
+
+
 
 
 
@@ -169,7 +206,8 @@ class Scene2 extends Phaser.Scene {
     sword.setVisible(false);
     //Changing this to out of Atlas for now in order to check if the sprite has armed texture when pressing F 
     player.setTexture('armed_guy');
-    this.player.setSize(21, 0, 0, 0);
+    this.player.setSize(0,0);
+    this.player.setScale(4);
 
     this.weaponBtn.setTexture('char_sprites', 'inventory_with_sword.png');
   }
@@ -184,6 +222,36 @@ class Scene2 extends Phaser.Scene {
   }
 
 
+
+   
+  
+
+
+
+
+  npcAnimation () {
+    this.tween = this.tweens.add({
+    targets: this.npc,
+    x: 120,
+    delay: 1000,
+    //duration: 2000,
+    repeat: -1,
+    ease: 'Linear',
+    loopDelay: 4000,
+    repeatDelay: 4000,
+    yoyo: true,
+    flipX: true
+
+  })
+
+ 
+
+
+  
+}
+
+
+ 
 
 
 
