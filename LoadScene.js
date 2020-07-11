@@ -16,6 +16,10 @@ class LoadScene extends Phaser.Scene {
       this.load.image('armed_guy', 'assets/Enchanted_Guy_Sword.png', {frameWidth: 16, frameHeight: 16});
 
 
+      this.load.image('enemy_guy', 'assets/enemy.png', {frameWidth: 16, frameHeight: 16});
+
+
+
       this.load.atlas({
         key: 'char_sprites',
         textureURL: 'assets/enchanted_characterJr.png',

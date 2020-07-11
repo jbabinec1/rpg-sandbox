@@ -31,6 +31,8 @@ class Scene2 extends Phaser.Scene {
 
       this.npc = this.physics.add.sprite(300, 90, 'npc_sprites', 'enchanted_npc.png');
 
+      this.enemy = this.physics.add.sprite(500, 90, 'enemy_guy', 'enemy.png');
+
       
       
       this.npcAnimation();
@@ -58,6 +60,7 @@ class Scene2 extends Phaser.Scene {
       this.player.setVelocity(0);
       this.player.body.setAllowGravity(false);
       this.player.setCollideWorldBounds(false); 
+      this.player.body.immovable = true;
       //this.player.setSize(30, 0, 0, 0);
       
 
@@ -68,7 +71,12 @@ class Scene2 extends Phaser.Scene {
       this.npc.body.immovable = true; 
 
 
-     
+     this.enemy.body.setAllowGravity(false);
+     this.enemy.setVelocity(0);
+     this.enemy.body.setSize(20,20);
+     this.enemy.body.immovable = true; 
+
+     this.physics.add.collider(this.player, this.enemy);
     
     
 
@@ -191,7 +199,29 @@ class Scene2 extends Phaser.Scene {
         this.tween.resume();
       }
       
+
+  
+
+
+      var distance = Phaser.Math.Distance.Between(this.enemy.x, this.enemy.y, this.player.x, this.player.y);
+
+      //WIP .. checking if players position is greater than 600 .. will trigger function to follow player
+      if(this.player.body.position.x > 600) {
+        
+       this.physics.moveToObject(this.enemy, this.player, 400);
+     
+       if (distance < 60)  // the lower the number the closer enemy is to player
+        {
+            //this.enemy.body.reset(this.enemy.x, this.enemy.y);
+            this.enemy.body.setVelocity(0);
+            this.enemy.body.setVelocityX(0);
+            this.enemy.body.setVelocityY(0);
+          
+        }
+
+      }
     
+
 
 
 
@@ -227,7 +257,7 @@ class Scene2 extends Phaser.Scene {
   
 
 
-
+//Npc (non enemy) movement tween thing
 
   npcAnimation () {
     this.tween = this.tweens.add({
@@ -241,17 +271,22 @@ class Scene2 extends Phaser.Scene {
     repeatDelay: 4000,
     yoyo: true,
     flipX: true
-
   })
-
  
-
-
-  
 }
 
 
+
+
+chasePlayer(player) {
+
+  //logic triggered if player's x position is greater than 700 .. 
+
+  moveToObject(this.enemy, player, 4000);
+};
  
+
+
 
 
 
